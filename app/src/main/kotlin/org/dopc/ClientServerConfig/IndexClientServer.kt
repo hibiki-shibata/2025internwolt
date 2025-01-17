@@ -5,6 +5,8 @@ import io.ktor.server.application.*
 import clientreqvalidation.ClientReqDataValidations
 import clientreqvalidation.ClientRequestParams
 
+import clientserverindex.DopcProcessIndex
+import extractrequireddata.ExtractRequiredVenueInfoForDopc
 
 
 data class ResponseDataToClient(
@@ -23,10 +25,20 @@ data class Delivery(
 
 class DopcProcessIndex {
     
-    fun dopcIndexCalculation(call: ApplicationCall): ClientRequestParams {
-        val clientReqDataValidations: ClientRequestParams = ClientReqDataValidations().catchClientReqParams(call)  
+    suspend fun dopcIndexCalculation(call: ApplicationCall): ClientRequestParams {
+
+        // Examine User Info, Check if request URI has required params in expected data type, otherwise throw Badrequest error
+        val clientReqDataValidations: ClientRequestParams = ClientReqDataValidations().catchClientReqParams(call) // (venue_slug, cart_value, user_lat,  user_lon:)
         
-    return clientReqDataValidations
+        // FetchVenueSauceData
+        val venueSauceInfo = ExtractRequiredVenueInfoForDopc(clientReqDataValidations.venue_slug)
+        val venueDataStatic = venueSauceInfo.venueCoordinatesStatic()
+        val venueDataDynamic = venueSauceInfo.venueDeliveryFeesDynamic()
+        println("Venue Static PRINT::::::: " + venueDataStatic)
+        println("Venue Dynamic PRINT::::::: " + venueDataDynamic)
+
+
+        return clientReqDataValidations
     }
 
 }
