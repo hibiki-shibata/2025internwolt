@@ -18,6 +18,9 @@ import feecalculationindex.CalculatedPricesData
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
+
+
+
 @Serializable
 data class ResponseDataToClient(
     val total_price: Int,
@@ -33,31 +36,34 @@ data class Delivery(
 )
 
 
+
+
 class DopcProcessIndex {
     
     suspend fun dopcIndexCalculation(call: ApplicationCall): ResponseDataToClient {
 
         ///// Extract required Data 
         // Examine User Info, Check if request URI has required params in expected data type, otherwise throw Badrequest error
-        val clientReqDataValidations: ClientRequestParams = ClientReqDataValidations().catchClientReqParams(call) // (venue_slug, cart_value, user_lat,  user_lon:)
-        val userCoordinatesList: List<Double> = listOf(clientReqDataValidations.user_lon, clientReqDataValidations.user_lat)
+        val clientReqDataValidations: ClientRequestParams = ClientReqDataValidations().catchClientReqParams(call) // (venue_slug, cart_value, user_coordinate)
 
         // FetchVenueSauceData
         val venueSauceInfo: ExtractRequiredVenueInfoForDopc = ExtractRequiredVenueInfoForDopc(clientReqDataValidations.venue_slug) // Class Instance
         val venueDataStatic: VenueStaticData = venueSauceInfo.venueCoordinatesStatic() // coordinates
         val venueDataDynamic: VenueDynamicData = venueSauceInfo.venueDeliveryFeesDynamic() // order_minimum_no_surcharge, delivery_pricing, distance_ranges
         
-///// Fee Calculations
+
+
+        ///// Fee Calculations
         val deliveryFeeTotal: CalculatedPricesData = DeliveryFeeTotal(
                 clientReqDataValidations.cart_value,
                 venueDataDynamic.base_price,
                 venueDataDynamic.order_minimum_no_surcharge,
-                userCoordinatesList,
+                clientReqDataValidations.user_coodinate,
                 venueDataStatic.coordinates,
                 venueDataDynamic.distance_ranges
             ).deliveryFeeTotalCalculation()
 
-            
+
 
         return ResponseDataToClient(
              total_price = deliveryFeeTotal.totalPurchasePrice,

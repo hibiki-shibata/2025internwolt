@@ -16,10 +16,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
-
 // Http
 import io.ktor.http.HttpStatusCode
-
 import io.ktor.server.plugins.BadRequestException
 
 // For handle status code receive & respond
@@ -27,6 +25,9 @@ import io.ktor.server.request.*
 
 import clientserverindex.DopcProcessIndex
 import clientserverindex.ResponseDataToClient
+
+
+
 
 class ClientServer {
     
@@ -55,7 +56,7 @@ class ClientServer {
 
                     } catch (e: Exception) {
                         call.respond(HttpStatusCode.InternalServerError, "500: Internal Server Error\n Unexpected error happened:(")
-                        println(e.message)
+                        // println(e.message)
                     }
 
                 }

@@ -13,11 +13,6 @@ import io.ktor.http.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 
-// kotlinx Json Serialization
-// import kotlinx.serialization.*
-// import kotlinx.serialization.json.*
-
-// Handle client request response body
 import io.ktor.client.call.*
 
 

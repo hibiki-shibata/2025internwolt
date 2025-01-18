@@ -4,20 +4,21 @@ package clientreqvalidation
 import io.ktor.server.application.*
 import io.ktor.server.plugins.BadRequestException
 
+
 data class ClientRequestParams(
     val venue_slug: String,
     val cart_value: Int,
-    val user_lat: Double,
-    val user_lon: Double
+    val user_coodinate: List<Double>
     )
+    
 
 class ClientReqDataValidations() { 
 
     fun catchClientReqParams(call: ApplicationCall): ClientRequestParams {
-        val venueSlug = call.request.queryParameters["venue_slug"]?.toString()
-        val cartValue = call.request.queryParameters["cart_value"]?.toIntOrNull()
-        val userLat = call.request.queryParameters["user_lat"]?.toDoubleOrNull()
-        val userLon = call.request.queryParameters["user_lon"]?.toDoubleOrNull()
+        val venueSlug: String?  = call.request.queryParameters["venue_slug"]?.toString()
+        val cartValue: Int? = call.request.queryParameters["cart_value"]?.toIntOrNull()
+        val userLat: Double? = call.request.queryParameters["user_lat"]?.toDoubleOrNull()
+        val userLon: Double? = call.request.queryParameters["user_lon"]?.toDoubleOrNull()
 
         val isValidParams: Boolean = venueSlug !== null && cartValue !== null && userLat !== null && userLon !== null
         
@@ -25,13 +26,15 @@ class ClientReqDataValidations() {
         if(!isValidParams) throw BadRequestException("invalid params value or missing mandatory parameters")        
         // Check if cartValue is negative
         if (cartValue < 0) throw BadRequestException("cartValue must be greater than 0")
+
+        // Comile user coordinate in a List
+        val userCoordinateList: List<Double> = listOf(userLon, userLat)
         
 
         return ClientRequestParams(
                 venue_slug = venueSlug,
                 cart_value = cartValue,
-                user_lat = userLat,
-                user_lon = userLon
+                user_coodinate = userCoordinateList
                 )        
     }
 

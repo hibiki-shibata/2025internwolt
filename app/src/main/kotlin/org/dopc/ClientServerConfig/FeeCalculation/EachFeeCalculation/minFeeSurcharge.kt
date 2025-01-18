@@ -1,8 +1,6 @@
 package minsurchargefee
 
 
-// import fetchvenuedata
-
 
 class MinSurchargeFee{
 

@@ -3,7 +3,6 @@ package dynamixVenueInfoStructure
 // For Json decode
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
-// venue_raw.delivery_specs.delivery_pricing.distance_ranges
 
 @Serializable
 data class VenueRawDynamic(
