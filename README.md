@@ -1,8 +1,8 @@
 # File structure
 ## Source directory
-`./app/src/main/kotlin/woltDeliveryFee/*`
+`./app/src/main/Kotlin/org/dopc/*`
 #### Entry point: 
-`./app/src/main/kotlin/woltDeliveryFee/App.kt`
+`./app/src/main/Kotlin/org/dopc/Index.kt`
 #### Server configuration: 
 `./app/src/main/kotlin/woltDeliveryFee/Server.kt`
 #### Verify requested values are valid:
@@ -14,22 +14,24 @@
 
 ## Test directory:
 `./app/src/test/kotlin/woltDeliveryFee/*`
+`./app/src/test/kotlin/dopc/`
+
 
 ## Dependencies:
 `./app/build.gradle.kts`
 
 # Specification
-https://github.com/woltapp/engineering-internship-2024
+https://github.com/woltapp/backend-internship-2025
 
 # Prerequisite
-[Gradle](https://gradle.org/)(8.5~) and Java(ver19~) installed.
+[Gradle](https://gradle.org/)(8.12~) and Java(ver19~) installed.
 
 # Testing
 ## Unit test: 
 ```bash
 $ gradle test
 ```
-## API test:
+## API running:
 ```bash
 $ gradle run
 ```

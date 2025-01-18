@@ -23,26 +23,27 @@ repositories {
     mavenCentral()
 }
 
+val ktorVersion = "3.0.3"
+// val ktorVersion = "2.3.9"
 
 dependencies {
 
-
-    implementation("io.ktor:ktor-server-core:2.3.9")
-    implementation("io.ktor:ktor-server-netty:2.3.9")
+    implementation("io.ktor:ktor-server-core:${ktorVersion}")
+    implementation("io.ktor:ktor-server-netty:${ktorVersion}")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     // Json 
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.9")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.9")
+    implementation("io.ktor:ktor-server-content-negotiation:${ktorVersion}")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
 
     // Ktor making request
-    implementation("io.ktor:ktor-client-core:2.3.9")
-    implementation("io.ktor:ktor-client-cio:2.3.9")
-    implementation("io.ktor:ktor-client-logging:2.3.9")
+    implementation("io.ktor:ktor-client-core:${ktorVersion}")
+    implementation("io.ktor:ktor-client-cio:${ktorVersion}")
+    implementation("io.ktor:ktor-client-logging:${ktorVersion}")
     // Handle received Json
-    implementation("io.ktor:ktor-client-content-negotiation:2.3.9")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.9")
+    implementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
 
 
     // Use the Kotlin JUnit 5 integration.
@@ -76,4 +77,23 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+
+tasks.jar {
+    // this line is telling compiler main file inside the Jar file
+    manifest {
+        attributes["Main-Class"] = "index.IndexKt"
+    } 
+            //main source has to be included in jar file
+        from(sourceSets.main.get().output) 
+            // source code is depends on the confgured classpathes
+        dependsOn(configurations.runtimeClasspath) 
+            // this is finding jar file from the dependencies and find ziptrees which represent content of Jar file
+        from({
+            configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+        })
+            // this line make sure that if there is duplicated config file in different dependencies, only one file will be included in Jar so that it won't be duplicated
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE 
+    
 }

@@ -57,10 +57,7 @@ class DopcProcessIndex {
                 venueDataDynamic.distance_ranges
             ).deliveryFeeTotalCalculation()
 
-
-            // println("Venue Static PRINT::::::: " + venueDataStatic)
-            // println("Venue Dynamic PRINT::::::: " + venueDataDynamic)
-
+            
 
         return ResponseDataToClient(
              total_price = deliveryFeeTotal.totalPurchasePrice,
