@@ -1,4 +1,4 @@
-package minfeesurcharge
+package feecalculationindex
 
 
 // import fetchvenuedata

@@ -28,7 +28,7 @@ data class Delivery(
 
 class DopcProcessIndex {
     
-    suspend fun dopcIndexCalculation(call: ApplicationCall): ClientRequestParams {
+    suspend fun dopcIndexCalculation(call: ApplicationCall): Int {
 
         // Examine User Info, Check if request URI has required params in expected data type, otherwise throw Badrequest error
         val clientReqDataValidations: ClientRequestParams = ClientReqDataValidations().catchClientReqParams(call) // (venue_slug, cart_value, user_lat,  user_lon:)
@@ -49,11 +49,13 @@ class DopcProcessIndex {
                 venueDataDynamic.distance_ranges
             ).deliveryFeeTotalCalculation()
 
+            
+
             println("Venue Static PRINT::::::: " + venueDataStatic)
             println("Venue Dynamic PRINT::::::: " + venueDataDynamic)
 
 
-        return clientReqDataValidations
+        return totalDeliveryPrice
     }
 
 }
