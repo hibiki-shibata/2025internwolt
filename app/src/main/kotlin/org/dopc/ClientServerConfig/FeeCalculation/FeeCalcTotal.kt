@@ -4,6 +4,10 @@ import requestvenuedata.RequestRestaurantData
 import dynamixVenueInfoStructure.DistanceRange
 // import extractrequireddata.VenueStaticData
 // import minfeesurcharge.minFreeSurcharge() // Function
+import minsurchargefee.MinSurchargeFee
+
+import distancefeeindex.DistanceFee
+
 
 // data class cartValue(
 //     val cart_value: Int,
@@ -32,16 +36,21 @@ class DeliveryFeeTotal(
     
     fun  deliveryFeeTotalCalculation(): Int {
 
-        println("ATTENTIIIIIIIIIIION!!")
-        println("cart value" + cart_value)
-        println("base delivery fee" + base_delivery_fee)
-        println("minimu no surcharge" + order_minimum_no_surcharge)
-        println("user coordinate" + user_coordinate)
-        println("venue coordinate" + venue_coordinate)
-        println("distance range" + distance_ranges)
+        // println("ATTENTIIIIIIIIIIION!!")
+        // println("cart value" + cart_value)
+        // println("base delivery fee" + base_delivery_fee)
+        // println("minimu no surcharge" + order_minimum_no_surcharge)
+        // println("user coordinate" + user_coordinate)
+        // println("venue coordinate" + venue_coordinate)
+        // println("distance range" + distance_ranges)
 
-        val finalizedSurchargeFee: Int = minSurchargeFee(cart_value, order_minimum_no_surcharge)
+        val finalizedSurchargeFee: Int = MinSurchargeFee().minSurchargeFee(cart_value, order_minimum_no_surcharge)
         println("finalizedSurchargeFee: " + finalizedSurchargeFee)
+
+        val finalizedDistanceFee: Int = DistanceFee().distanceFee(base_delivery_fee, user_coordinate, venue_coordinate, distance_ranges)
+        
+        
+        val AllTotalPrice: Int = cart_value + finalizedDistanceFee + finalizedSurchargeFee 
         
         return 11
     }   
