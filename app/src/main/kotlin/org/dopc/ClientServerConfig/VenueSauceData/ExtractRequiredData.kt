@@ -18,7 +18,7 @@ data class VenueStaticData (
 
 data class VenueDynamicData (
     val order_minimum_no_surcharge: Int,
-    val delivery_pricing: Int,
+    val base_price: Int,
     val distance_ranges: List<DistanceRange>
 )
 
@@ -59,7 +59,7 @@ class ExtractRequiredVenueInfoForDopc(venueSlug: String) {
 
         return VenueDynamicData(
             order_minimum_no_surcharge = orderMinimumNoSurcharge,
-            delivery_pricing = basePrice,
+            base_price = basePrice,
             distance_ranges = distanceRanges
         )
     }
