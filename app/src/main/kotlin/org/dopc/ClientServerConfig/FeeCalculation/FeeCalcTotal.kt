@@ -1,13 +1,13 @@
-package feecalculationindex
+package org.dopc.clientserverconfig.feecalculation.feecalctotal
 
-import requestvenuedata.RequestRestaurantData
-import dynamixVenueInfoStructure.DistanceRange
+import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
+import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 // import extractrequireddata.VenueStaticData
 // import minfeesurcharge.minFreeSurcharge() // Function
-import minsurchargefee.MinSurchargeFee
+import org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge.MinSurchargeFee
 
-import distancefeeindex.DistanceFee
-import distancefeeindex.DistanceFeeInfo
+import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFee
+import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFeeInfo
 
 
 data class CalculatedPricesData(

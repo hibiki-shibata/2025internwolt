@@ -1,14 +1,14 @@
-package extractrequireddata
+package org.dopc.clientserverconfig.venuesaucedata.findrequireddata
 
-import requestvenuedata.RequestRestaurantData
+import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
 
 // Json
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
-import staticVenueInfoStructure.VenueRawStatic
-import dynamixVenueInfoStructure.VenueRawDynamic
-import dynamixVenueInfoStructure.DistanceRange
+import org.dopc.clientserverconfig.venuesaucedata.jsonstructurestatic.VenueRawStatic
+import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.VenueRawDynamic
+import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 
 
 data class VenueStaticData (

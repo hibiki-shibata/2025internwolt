@@ -1,6 +1,6 @@
-package distancefeeindex
+package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 
-import dynamixVenueInfoStructure.DistanceRange
+import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 
 
 fun findDistanceRange(distanceRanges: List<DistanceRange>, deliveryDistance: Double): DistanceRange? {

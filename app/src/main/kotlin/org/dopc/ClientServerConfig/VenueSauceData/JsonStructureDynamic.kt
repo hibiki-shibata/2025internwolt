@@ -1,4 +1,4 @@
-package dynamixVenueInfoStructure
+package org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic
 
 // For Json decode
 import kotlinx.serialization.*

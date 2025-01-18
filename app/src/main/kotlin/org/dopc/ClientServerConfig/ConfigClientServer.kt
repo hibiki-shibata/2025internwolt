@@ -1,4 +1,4 @@
-package clientserverconfig
+package org.dopc.clientserverconfig.configclientserver
 
 // Ktor Server
 import io.ktor.server.application.*
@@ -23,8 +23,8 @@ import io.ktor.server.plugins.BadRequestException
 // For handle status code receive & respond
 import io.ktor.server.request.* 
 
-import clientserverindex.DopcProcessIndex
-import clientserverindex.ResponseDataToClient
+import org.dopc.clientserverconfig.indexclientserver.DopcProcessIndex
+import org.dopc.clientserverconfig.indexclientserver.ResponseDataToClient
 
 
 

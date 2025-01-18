@@ -1,4 +1,4 @@
-package distancefeeindex
+package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 // import dynamixVenueInfoStructure.DistanceRange
 import kotlin.math.*
 // import kotlin.math.roundToInt

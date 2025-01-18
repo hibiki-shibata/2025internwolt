@@ -1,4 +1,4 @@
-package staticVenueInfoStructure
+package org.dopc.clientserverconfig.venuesaucedata.jsonstructurestatic
 
 // For Json decode
 import kotlinx.serialization.*

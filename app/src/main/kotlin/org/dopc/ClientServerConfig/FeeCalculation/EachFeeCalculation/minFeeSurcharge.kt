@@ -1,4 +1,4 @@
-package minsurchargefee
+package org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge
 
 
 

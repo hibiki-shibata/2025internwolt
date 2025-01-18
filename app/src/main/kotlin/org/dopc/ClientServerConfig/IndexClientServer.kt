@@ -1,18 +1,18 @@
-package clientserverindex
+package org.dopc.clientserverconfig.indexclientserver
 
 import io.ktor.server.application.*
 
-import clientreqvalidation.ClientReqDataValidations
-import clientreqvalidation.ClientRequestParams
+import org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate.ClientReqDataValidations
+import org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate.ClientRequestParams
 
-import clientserverindex.DopcProcessIndex
+// import clientserverindex.DopcProcessIndex
 
-import extractrequireddata.ExtractRequiredVenueInfoForDopc
-import extractrequireddata.VenueDynamicData
-import extractrequireddata.VenueStaticData
+import org.dopc.clientserverconfig.venuesaucedata.findrequireddata.ExtractRequiredVenueInfoForDopc
+import org.dopc.clientserverconfig.venuesaucedata.findrequireddata.VenueDynamicData
+import org.dopc.clientserverconfig.venuesaucedata.findrequireddata.VenueStaticData
 
-import feecalculationindex.DeliveryFeeTotal
-import feecalculationindex.CalculatedPricesData
+import org.dopc.clientserverconfig.feecalculation.feecalctotal.DeliveryFeeTotal
+import org.dopc.clientserverconfig.feecalculation.feecalctotal.CalculatedPricesData
 
 // Json
 import kotlinx.serialization.*

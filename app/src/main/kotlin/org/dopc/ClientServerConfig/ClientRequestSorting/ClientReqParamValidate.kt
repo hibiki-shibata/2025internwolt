@@ -1,4 +1,4 @@
-package clientreqvalidation
+package org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate
 
 // TO Use ApplicationCall Type
 import io.ktor.server.application.*

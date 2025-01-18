@@ -1,4 +1,4 @@
-package requestvenuedata
+package org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi
 
 import io.ktor.client.*
 import io.ktor.client.request.*

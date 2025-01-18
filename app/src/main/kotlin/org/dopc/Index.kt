@@ -3,7 +3,7 @@
  */
 package index
 
-import clientserverconfig.ClientServer
+import org.dopc.clientserverconfig.configclientserver.ClientServer
 
 
 fun main() {
