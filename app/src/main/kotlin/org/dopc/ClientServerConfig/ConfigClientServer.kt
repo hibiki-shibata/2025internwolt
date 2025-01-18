@@ -12,6 +12,10 @@ import kotlinx.serialization.Serializable
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
+// Json Serialize
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
+
 
 // Http
 import io.ktor.http.HttpStatusCode
@@ -22,6 +26,7 @@ import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.request.* 
 
 import clientserverindex.DopcProcessIndex
+import clientserverindex.ResponseDataToClient
 
 class ClientServer {
     
@@ -36,11 +41,13 @@ class ClientServer {
                 get("/api/v1/delivery-order-price") {
                     try {
                         
-                        val responseData: Any = DopcProcessIndex().dopcIndexCalculation(call)
+                        val responseDataJson: ResponseDataToClient = DopcProcessIndex().dopcIndexCalculation(call)
+
+                        val responseDataString: String = Json.encodeToString(responseDataJson)
                         // Extract required valid params values
                         // val clientReqDataValidations: ClientRequestParams = ClientReqDataValidations().catchClientReqParams(call)  
              
-                        call.respond("Response chu: " + responseData )
+                        call.respond(responseDataString )
                    
                                             
                     } catch (e: BadRequestException) {                   
@@ -48,6 +55,7 @@ class ClientServer {
 
                     } catch (e: Exception) {
                         call.respond(HttpStatusCode.InternalServerError, "500: Internal Server Error\n Unexpected error happened:(")
+                        println(e.message)
                     }
 
                 }

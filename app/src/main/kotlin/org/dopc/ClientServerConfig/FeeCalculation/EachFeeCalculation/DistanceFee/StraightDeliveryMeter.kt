@@ -1,10 +1,10 @@
 package distancefeeindex
 // import dynamixVenueInfoStructure.DistanceRange
 import kotlin.math.*
-import kotlin.math.roundToInt
+// import kotlin.math.roundToInt
 
 
-fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates: List<Double>): Int{
+fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates: List<Double>): Double{
     // val diffeLon: Double = venueCoordinates[0] - userCoordinates[0]
     // val diffeLat: Double = venueCoordinates[1] - userCoordinates[1]
 
@@ -23,5 +23,5 @@ fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates
 
     val straightDistanceMeter: Double = radius * c * 1000
 
-return straightDistanceMeter.roundToInt()
+return straightDistanceMeter
 }

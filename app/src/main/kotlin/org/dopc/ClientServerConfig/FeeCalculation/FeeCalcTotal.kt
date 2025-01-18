@@ -7,14 +7,17 @@ import dynamixVenueInfoStructure.DistanceRange
 import minsurchargefee.MinSurchargeFee
 
 import distancefeeindex.DistanceFee
+import distancefeeindex.DistanceFeeInfo
 
 
-// data class cartValue(
-//     val cart_value: Int,
-//     val order_minimum_no_surcharge: Int,
-//     val user_coordinate: List<Double>
-//     val venue_coordinate: List<Double>// VenueStaticData
-// )
+data class CalculatedPricesData(
+    val totalPurchasePrice: Int,
+    val order_minimum_surcharge: Int,
+    val cart_value: Int,
+    val delivery_fee: Int,
+    val delivery_distance: Int
+
+)
 
 // cartValue: Int, orderMinimumSurcharge: Int, userCoordinates, venuCoordinates, distanceRange, 
 class DeliveryFeeTotal(
@@ -34,25 +37,28 @@ class DeliveryFeeTotal(
     private val distance_ranges: List<DistanceRange> = distance_ranges
 
     
-    fun  deliveryFeeTotalCalculation(): Int {
+    fun  deliveryFeeTotalCalculation(): CalculatedPricesData {
 
-        // println("ATTENTIIIIIIIIIIION!!")
-        // println("cart value" + cart_value)
-        // println("base delivery fee" + base_delivery_fee)
-        // println("minimu no surcharge" + order_minimum_no_surcharge)
-        // println("user coordinate" + user_coordinate)
-        // println("venue coordinate" + venue_coordinate)
-        // println("distance range" + distance_ranges)
+        // Order size minimum Surcharge
+        val finalizedMinSurchargeFee: Int = MinSurchargeFee().minSurchargeFee(cart_value, order_minimum_no_surcharge)
+    
 
-        val finalizedSurchargeFee: Int = MinSurchargeFee().minSurchargeFee(cart_value, order_minimum_no_surcharge)
-        println("finalizedSurchargeFee: " + finalizedSurchargeFee)
-
-        val finalizedDistanceFee: Int = DistanceFee().distanceFee(base_delivery_fee, user_coordinate, venue_coordinate, distance_ranges)
+        // Distance base pricing
+        val distanceFeeResult: DistanceFeeInfo = DistanceFee().distanceFee(base_delivery_fee, user_coordinate, venue_coordinate, distance_ranges)
+        val deliveryDistanceMeter: Int = distanceFeeResult.deliveryDistanceInMeter
+        val finalizedDistanceFee: Int = distanceFeeResult.distanceFeeTotal
         
         
-        val AllTotalPrice: Int = cart_value + finalizedDistanceFee + finalizedSurchargeFee 
+        // ALL TOTAL PRICE IN THE PUERCHASE!!
+        val allTotalPrice: Int = cart_value + finalizedDistanceFee + finalizedMinSurchargeFee 
         
-        return 11
+        return CalculatedPricesData(
+            totalPurchasePrice = allTotalPrice,
+            order_minimum_surcharge = finalizedMinSurchargeFee,
+            cart_value = cart_value,
+            delivery_fee = finalizedDistanceFee,
+            delivery_distance = deliveryDistanceMeter
+        )
     }   
 
 }

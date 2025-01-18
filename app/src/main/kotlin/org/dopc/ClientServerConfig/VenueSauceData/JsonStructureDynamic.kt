@@ -33,7 +33,7 @@ data class DeliveryPricing(
 data class DistanceRange(
     val min: Int,
     val max: Int,
-    val a: Double,
+    val a: Int,
     val b: Double,
     val flag: Int?
 )
