@@ -9,6 +9,8 @@ package org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurchar
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+
 
 class MinSurchargeFeeTest {
 
@@ -92,9 +94,12 @@ class MinSurchargeFeeTest {
         val cartValue = -11
         val minimumOrderThreshold = -10
         
-        val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        // val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
         
+        assertFailsWith<Exception> {
+            minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        }
         // Surcharge is the difference between the minimum threshold and cart value
-        assertEquals(1, result)
+        // assertEquals(1, result)
     }
 }
