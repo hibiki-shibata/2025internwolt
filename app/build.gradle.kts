@@ -57,6 +57,8 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation("io.ktor:ktor-client-mock:${ktorVersion}")
+    testImplementation("io.mockk:mockk:1.13.5")
+
     // This dependency is used by the application.
     implementation(libs.guava)
 

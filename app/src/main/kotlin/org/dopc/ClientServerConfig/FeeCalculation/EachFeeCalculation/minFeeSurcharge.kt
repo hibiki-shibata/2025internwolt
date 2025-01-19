@@ -10,5 +10,5 @@ class MinSurchargeFee{
         return if (cartValue >= minimumOrderThreshold) 0 else minimumOrderThreshold - cartValue
         
     }
-    
+
 }
