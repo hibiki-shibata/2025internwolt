@@ -4,8 +4,10 @@ import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceR
 
 
 fun findDistanceRange(distanceRanges: List<DistanceRange>, deliveryDistance: Double): DistanceRange? {
-    return distanceRanges.find { range: DistanceRange  ->
-        // Check if the distance is within the range
-        deliveryDistance >= range.min && (range.max == 0 || deliveryDistance < range.max)
-    }
+    
+    for (range in distanceRanges) {
+        if (deliveryDistance >= range.min && deliveryDistance < range.max) return range        
+    }    
+    return null // Expect return null, when max = 0 too
+
 }

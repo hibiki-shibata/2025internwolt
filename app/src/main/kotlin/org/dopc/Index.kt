@@ -7,6 +7,6 @@ import org.dopc.clientserverconfig.configclientserver.ClientServer
 
 
 fun main() {
-    val clientServer = ClientServer()
+    val clientServer: ClientServer = ClientServer()
     clientServer.deliveryOrderFeeCalculator()
 }

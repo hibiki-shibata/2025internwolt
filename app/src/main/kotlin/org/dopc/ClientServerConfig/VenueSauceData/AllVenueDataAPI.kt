@@ -19,7 +19,7 @@ import io.ktor.client.call.*
 
 class RequestRestaurantData {
 
-    val client = HttpClient(CIO){
+    var client = HttpClient(CIO){ // var for 
         install(ContentNegotiation){
             json()
         }            

@@ -21,13 +21,16 @@ class DistanceFee{
         val distanceRangePricingConfig: DistanceRange? = findDistanceRange(distanceRanges, meterStraightDeliveryDistance)
 
         // Check if the user is in valid Delivery Area.
-        if(distanceRangePricingConfig == null || distanceRangePricingConfig.max == 0) throw BadRequestException("DeliveryDistance is Invalid. Your address may not be in delivery area") 
+        if(distanceRangePricingConfig == null) throw BadRequestException("DeliveryDistance is Invalid. Your address may not be in delivery area") 
         
         val distanceBasedFee: Int = (distanceRangePricingConfig.b * meterStraightDeliveryDistance / 10).roundToInt() //　Rounded for the nearest integer
         
 
         // TOTAL "delivery fee" from 1.Base delivery fee, 2.Distance Pricing Fee, 3.Distance pricing base fee
         val distanceFeeTotal: Int = baseDeliveryFee + distanceRangePricingConfig.a + distanceBasedFee
+        
+
+        if(distanceFeeTotal < 0) throw Exception("Distance fee was calculated negative")
         
         return DistanceFeeInfo(
              distanceFeeTotal = distanceFeeTotal,

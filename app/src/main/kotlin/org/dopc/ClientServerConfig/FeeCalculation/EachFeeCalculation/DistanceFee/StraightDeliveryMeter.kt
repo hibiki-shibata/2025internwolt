@@ -1,8 +1,7 @@
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 // import dynamixVenueInfoStructure.DistanceRange
 import kotlin.math.*
-// import kotlin.math.roundToInt
-
+// import io.ktor.client.statement.*
 
 fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates: List<Double>): Double{
 
@@ -20,6 +19,9 @@ fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates
     val c: Double = 2 * asin(sqrt(a))
 
     val straightDistanceMeter: Double = radius * c * 1000
+
+    //Ensure distance is always positive value  
+    if (straightDistanceMeter < 0) throw Exception("calculated distance was negative")
 
 return straightDistanceMeter
 }

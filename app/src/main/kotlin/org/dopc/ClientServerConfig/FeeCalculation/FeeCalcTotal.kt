@@ -52,6 +52,8 @@ class DeliveryFeeTotal(
         // ALL TOTAL PRICE IN THE PUERCHASE!!
         val allTotalPrice: Int = cart_value + finalizedDistanceFee + finalizedMinSurchargeFee 
         
+        if(allTotalPrice < 0) throw Exception("Negative total price was calculated:(")
+
         return CalculatedPricesData(
             totalPurchasePrice = allTotalPrice,
             order_minimum_surcharge = finalizedMinSurchargeFee,
