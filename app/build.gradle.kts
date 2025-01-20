@@ -6,33 +6,29 @@
  */
 
 plugins {
-    // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     alias(libs.plugins.kotlin.jvm)
 
     id("io.ktor.plugin") version "2.3.9"
 
-    // kotlin("jvm") version "1.9.23"
     kotlin("plugin.serialization") version "1.9.23"    
 
-    // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
+
 val ktorVersion = "3.0.3"
-// val ktorVersion = "2.3.9"
 
 dependencies {
-
+    
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    
     implementation("io.ktor:ktor-server-core:${ktorVersion}")
     implementation("io.ktor:ktor-server-netty:${ktorVersion}")
-
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-
+    
     // Json 
     implementation("io.ktor:ktor-server-content-negotiation:${ktorVersion}")
     implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
@@ -46,10 +42,9 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
 
 
+    
     // Use the Kotlin JUnit 5 integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    
-    // testImplementation("org.jetbrains.kotlin:kotlin-test")
 
     // Use the JUnit 5 integration.
     testImplementation(libs.junit.jupiter.engine)
@@ -57,30 +52,11 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     testImplementation("io.ktor:ktor-client-mock:${ktorVersion}")
-    testImplementation("io.mockk:mockk:1.13.5")
-    // testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
-
-    // testImplementation ("io.mockk:mockk-coroutines:1.13.4")// Add this to enable coroutine mocking
-
     testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
-    // testImplementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
-
-
-
-
-    // testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}}")
-    
-    // testImplementation("io.ktor:ktor-server-tests:${ktorVersion}")  // Ktor testing dependency
-    // testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.21")  // Kotlin test framework
-    // testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")  // JUnit Jupiter API
-    // testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")  // JUnit Jupiter Engine
-    
-    
+    testImplementation("io.mockk:mockk:1.13.5")
 
     // This dependency is used by the application.
     implementation(libs.guava)
-
-
     
 }
 
@@ -98,10 +74,12 @@ application {
     mainClass = "index.IndexKt"
 }
 
+
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
 
 
 tasks.jar {
