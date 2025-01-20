@@ -1,15 +1,15 @@
 
-# Prerequisite
+# Prerequisite:
 [Gradle](https://gradle.org/)(8.12~) and Java(ver19~) installed.
 
 # Testing
-## Unit test: 
-```bash
-$ gradle test
-```
-## Development server run:
+## 1. Development server run:
 ```bash
 $ gradle run
+```
+## 2. Unit x Integration test: 
+```bash
+$ gradle test
 ```
 
 # Build Jar file:
@@ -21,24 +21,24 @@ $ gradle build
 java -jar ~/2025internWolt/app/build/libs/app.jar
 ```
 
-## TEST with Postman
+## TEST with Postman:
 Import `./API_testing/postman.json` into [POSTMAN](https://www.postman.com/).
 -> run the folder in Postman for API tests
 
 
-# Specification
+# Specification:
 https://github.com/woltapp/backend-internship-2025
 
 
 
-# File structure
-## Source directory
+# File structure:
+## Source directory:
 `./app/src/main/Kotlin/org/dopc/*`
 #### Entry point: 
 `./app/src/main/Kotlin/org/dopc/Index.kt`
 #### Server configuration: 
 `./app/src/main/Kotlin/org/dopc/ClientServerConfig/ConfigClientServer.kt`
-#### Main data stream in Client Server: 
+#### Main data stream in Client Server - calculate response data: 
 `./app/src/main/Kotlin/org/dopc/ClientServerConfig/IndexClientServer.kt`
 #### Examine Client's request Data - if request params is in expected format:
 `./app/src/main/Kotlin/org/dopc/ClientServerConfig/ClientRequestSorting/ClientReqParamValidate.kt`
@@ -48,7 +48,7 @@ https://github.com/woltapp/backend-internship-2025
 `./app/src/main/Kotlin/org/dopc/ClientServerConfig/VenueSauceData/FindRequiredData.kt`
 #### Json structure Home Assignment API - Dynamic:
 `./app/src/main/Kotlin/org/dopc/ClientServerConfig/VenueSauceData/JsonStructureDynamic.kt`
-#### Json structure Home Assignment API - Static
+#### Json structure Home Assignment API - Static:
 `./app/src/main/Kotlin/org/dopc/ClientServerConfig/VenueSauceData/JsonStructureStatic.kt`
 ####  Calculate total prices and return all the data required to response:
 `./app/src/main/Kotlin/org/dopc/ClientServerConfig/FeeCalculation/FeeCalcTotal.kt`
@@ -64,6 +64,8 @@ https://github.com/woltapp/backend-internship-2025
 ## Test directory:
 `./app/src/test/kotlin/dopc/*`
 `./app/src/test/kotlin/dopc/`
+#### Integration test:
+`./app/src/test/kotlin/dopc/IndextTest.kt`
 
 ## Dependencies:
 `./app/build.gradle.kts`
