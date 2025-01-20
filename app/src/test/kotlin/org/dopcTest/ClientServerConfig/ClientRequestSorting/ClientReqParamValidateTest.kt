@@ -199,6 +199,49 @@ class ClientReqDataValidationsTest {
         }
         
     }
+    
+
+    @Test
+    fun `should return BadRequestException for inexisting user_lat`() {
+        val applicationCall = mockk<ApplicationCall>()
+        val mockRequest = mockk<ApplicationRequest>()
+
+        // Mocking negative cart
+        every { applicationCall.request } returns mockRequest
+        every { mockRequest.queryParameters } returns Parameters.build {
+            append("venue_slug", "home-assignment-venue-helsinki")
+            append("cart_value", "1000")
+            append("user_lat", "-90.1")  
+            append("user_lon", "180.0") 
+        }
+
+        
+        assertFailsWith<BadRequestException> {
+        clientReqDataValidations.catchClientReqParams(applicationCall)      
+        }
+        
+    }
+    
+    
+    @Test
+    fun `should return BadRequestException for inexisting user_lon`() {
+        val applicationCall = mockk<ApplicationCall>()
+        val mockRequest = mockk<ApplicationRequest>()
+
+        // Mocking negative cart
+        every { applicationCall.request } returns mockRequest
+        every { mockRequest.queryParameters } returns Parameters.build {
+            append("venue_slug", "home-assignment-venue-helsinki")
+            append("cart_value", "1000")
+            append("user_lat", "90.0")  
+            append("user_lon", "-180.1") 
+        }
+
+        assertFailsWith<BadRequestException> {
+        clientReqDataValidations.catchClientReqParams(applicationCall)      
+        }
+        
+    }
 }
 
 

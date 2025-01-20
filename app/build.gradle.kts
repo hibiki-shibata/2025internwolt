@@ -80,10 +80,23 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
+
+
+// tasks.register<Exec>("startServer") {
+//         commandLine("gradle", "run")
+// }
+
+// tasks.register<Exec>("stopServer") {
+//         commandLine("gradle", "--stop")
+// }
+
+
 tasks.test {
     testLogging {
-        showStandardStreams = true  // Make sure stdout and stderr are shown
+        showStandardStreams = true  // output println() values in gradle test
     }
+    // dependsOn("startServer")
+    // finalizedBy("stopServer")
 }
 
 

@@ -1,0 +1,9 @@
+{
+    "total_price": 1190,
+    "small_order_surcharge": 0,
+    "cart_value": 1000,
+    "delivery": {
+        "fee": 190,
+        "distance": 177
+    }
+}
