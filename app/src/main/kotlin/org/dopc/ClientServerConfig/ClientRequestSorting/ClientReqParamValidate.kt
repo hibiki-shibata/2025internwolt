@@ -1,6 +1,6 @@
 package org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate
 
-// TO Use ApplicationCall Type
+// To Use ApplicationCall Type
 import io.ktor.server.application.*
 import io.ktor.server.plugins.BadRequestException
 
@@ -23,11 +23,11 @@ class ClientReqDataValidations() {
         val isValidParams: Boolean = venueSlug !== null && cartValue !== null && userLat !== null && userLon !== null
         
         // Check If URI has all necessary params
-        if(!isValidParams) throw BadRequestException("invalid params value or missing mandatory parameters")        
+        if(!isValidParams) throw BadRequestException("invalid params value or missing mandatory parameters" + "slug=" + venueSlug +" cartValue=" + cartValue + " Lat=" + userLat + " Lon=" + userLon)        
         // Check if cartValue is negative
         if (cartValue < 0) throw BadRequestException("cartValue must be greater than 0")
 
-        // Comile user coordinate in a List
+        // Compile user coordinate in a List
         val userCoordinateList: List<Double> = listOf(userLon, userLat)
         
 

@@ -45,8 +45,7 @@ class ClientServer {
                         val responseDataJson: ResponseDataToClient = DopcProcessIndex().dopcIndexCalculation(call)
 
                         val responseDataString: String = Json.encodeToString(responseDataJson)
-                        // Extract required valid params values
-                        // val clientReqDataValidations: ClientRequestParams = ClientReqDataValidations().catchClientReqParams(call)  
+                        // make it into Json
              
                         call.respond(responseDataString )
                    

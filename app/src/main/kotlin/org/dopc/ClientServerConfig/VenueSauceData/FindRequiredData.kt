@@ -29,7 +29,9 @@ class ExtractRequiredVenueInfoForDopc(venueSlug: String) {
     private val venueSlug: String = venueSlug
 
     val json = Json { ignoreUnknownKeys = true } // Parse json string
-    val requestRestaurantData = RequestRestaurantData()
+    val requestRestaurantData: RequestRestaurantData = RequestRestaurantData()
+
+
 
     suspend fun venueCoordinatesStatic(): VenueStaticData {
 
@@ -37,7 +39,7 @@ class ExtractRequiredVenueInfoForDopc(venueSlug: String) {
         val staticVenueInfoJson = json.decodeFromString<VenueRawStatic>(staticVenueJsonString)
 
         val venueCoordinates: List<Double> = staticVenueInfoJson.venue_raw.location.coordinates
-        // val staticVenueInfo = test.fetchStaticVenueInfo("home-assignment-venue-helsinki")        
+
 
         return VenueStaticData(
             coordinates = venueCoordinates

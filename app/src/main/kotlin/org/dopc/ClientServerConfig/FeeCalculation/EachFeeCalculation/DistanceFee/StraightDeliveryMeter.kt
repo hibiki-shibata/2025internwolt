@@ -1,7 +1,6 @@
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
-// import dynamixVenueInfoStructure.DistanceRange
+
 import kotlin.math.*
-// import io.ktor.client.statement.*
 
 fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates: List<Double>): Double{
 

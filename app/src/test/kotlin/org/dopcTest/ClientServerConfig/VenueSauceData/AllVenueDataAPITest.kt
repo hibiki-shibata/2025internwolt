@@ -22,7 +22,7 @@ class RequestRestaurantDataTest {
         val mockEngine = MockEngine { request ->
             assertEquals("https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/$venueSlug/static", request.url.toString())
             respond(
-                content = """{"data": "Static venue info"}""",
+                content = """{"data": "Static venue Json"}""",
                 status = HttpStatusCode.OK,
                 headers = headersOf("Content-Type", "application/json")
             )
@@ -37,9 +37,10 @@ class RequestRestaurantDataTest {
         val requestRestaurantData = RequestRestaurantData().apply { this.client = client }
         val result = requestRestaurantData.fetchStaticVenueInfo(venueSlug)
 
-        assertEquals("""{"data": "Static venue info"}""", result)
+        assertEquals("""{"data": "Static venue Json"}""", result)
     }
 
+    
     @Test
     fun `fetchStaticVenueInfo should throw exception on non-successful HTTP status`() = runBlocking {
         val venueSlug = "home-assignment-venue-helsinki"
@@ -62,6 +63,7 @@ class RequestRestaurantDataTest {
         }
     }
 
+
     @Test
     fun `fetchDynamicVenueInfo should return response body on successful request`() = runBlocking {
         val venueSlug = "home-assignment-venue-helsinki"
@@ -70,7 +72,7 @@ class RequestRestaurantDataTest {
         val mockEngine = MockEngine { request ->
             assertEquals("https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/$venueSlug/dynamic", request.url.toString())
             respond(
-                content = """{"data": "Dynamic venue info"}""",
+                content = """{"data": "Dynamic venue Json"}""",
                 status = HttpStatusCode.OK,
                 headers = headersOf("Content-Type", "application/json")
             )
@@ -85,8 +87,9 @@ class RequestRestaurantDataTest {
         val requestRestaurantData = RequestRestaurantData().apply { this.client = client }
         val result = requestRestaurantData.fetchDynamicVenueInfo(venueSlug)
 
-        assertEquals("""{"data": "Dynamic venue info"}""", result)
+        assertEquals("""{"data": "Dynamic venue Json"}""", result)
     }
+
 
     @Test
     fun `fetchDynamicVenueInfo should throw exception on non-successful HTTP status`() = runBlocking {

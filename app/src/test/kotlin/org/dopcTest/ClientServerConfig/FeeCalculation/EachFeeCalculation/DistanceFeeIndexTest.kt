@@ -1,9 +1,3 @@
-// baseDeliveryFee negative
-// all 0
-// 400 error?, when delivery distance is above than the max distance
-
-// 0.5 round up, 0.4 round down(distanceRangePricingConfig.b * meterStraightDeliveryDistance / 10).roundToInt() //　Rounded for the nearest integer
-
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 
 import io.ktor.server.plugins.BadRequestException
@@ -61,11 +55,11 @@ class DistanceFeeTest {
     }
 
 
-    // Test invalid coordinates (NaN or out of bounds)
+    // Test invalid coordinates
     @Test
     fun `should throw exception for invalid coordinates (NaN)`() {
         val baseDeliveryFee = 1000
-        val userCoordinates = listOf(Double.NaN, 10.0) // Invalid latitude
+        val userCoordinates = listOf(Double.NaN, 10.0) // Invalid coordinates
         val venueCoordinates = listOf(10.0, 10.0)
         val distanceRanges = listOf(
             DistanceRange(0, 500, 100, 0.5, null),

@@ -1,14 +1,9 @@
-// exampine if the returned value is as expected
-// negative values
-// 0 
 package org.dopc.clientserverconfig.feecalculation.feecalctotal
 
 import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
-// import extractrequireddata.VenueStaticData
-// import minfeesurcharge.minFreeSurcharge() // Function
-import org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge.MinSurchargeFee
 
+import org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge.MinSurchargeFee
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFee
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFeeInfo
 
@@ -20,7 +15,7 @@ import kotlin.test.assertFailsWith
 
 class DeliveryFeeTotalTest {
 
-    // Sample DistanceRange for testing purposes
+    // Example DistanceRange for testing
     private val distanceRanges = listOf(
             DistanceRange(0, 500, 0,  0.0, null),
             DistanceRange(500, 1000, 100, 0.0, null),
@@ -46,9 +41,10 @@ class DeliveryFeeTotalTest {
         assertEquals(1290, result.totalPurchasePrice)
         assertEquals(0, result.order_minimum_surcharge)
         assertEquals(cartValue, result.cart_value)
-        assertEquals(190, result.delivery_fee) // Assuming the distance fee is 100
-        assertEquals(177, result.delivery_distance) // Assuming this based on the mock distances
+        assertEquals(190, result.delivery_fee) 
+        assertEquals(177, result.delivery_distance)
     }
+
 
     // Test when cart value is equal to minimum surcharge threshold
     @Test
@@ -67,9 +63,10 @@ class DeliveryFeeTotalTest {
         assertEquals(1190, result.totalPurchasePrice)
         assertEquals(0, result.order_minimum_surcharge)
         assertEquals(cartValue, result.cart_value)
-        assertEquals(190, result.delivery_fee) // Assuming the distance fee is 100
+        assertEquals(190, result.delivery_fee) 
         assertEquals(177, result.delivery_distance)
     }
+
 
     // Test when cart value is below the minimum surcharge threshold
     @Test
@@ -88,7 +85,7 @@ class DeliveryFeeTotalTest {
         assertEquals(1190, result.totalPurchasePrice)
         assertEquals(100, result.order_minimum_surcharge)
         assertEquals(cartValue, result.cart_value)
-        assertEquals(190, result.delivery_fee) // Assuming the distance fee is 100
+        assertEquals(190, result.delivery_fee) 
         assertEquals(177, result.delivery_distance)
     }
 
@@ -103,7 +100,6 @@ class DeliveryFeeTotalTest {
 
         val deliveryFeeTotal = DeliveryFeeTotal(cartValue, baseDeliveryFee, orderMinimumNoSurcharge, userCoordinates, venueCoordinates, distanceRanges)
 
-        // This should throw an exception due to a negative total price
         assertFailsWith<Exception> {
             deliveryFeeTotal.deliveryFeeTotalCalculation()
         }
@@ -122,11 +118,10 @@ class DeliveryFeeTotalTest {
 
         val result = deliveryFeeTotal.deliveryFeeTotalCalculation()
 
-        // No surcharge should be applied
         assertEquals(10000190, result.totalPurchasePrice)
         assertEquals(0, result.order_minimum_surcharge)
         assertEquals(cartValue, result.cart_value)
-        assertEquals(190, result.delivery_fee) // Assuming the distance fee is 100
+        assertEquals(190, result.delivery_fee) 
         assertEquals(177, result.delivery_distance)
     }
 
@@ -140,7 +135,7 @@ class DeliveryFeeTotalTest {
         val venueCoordinates = listOf(240.92813512, 600.17012143) 
 
         val deliveryFeeTotal = DeliveryFeeTotal(cartValue, baseDeliveryFee, orderMinimumNoSurcharge, userCoordinates, venueCoordinates, distanceRanges)
-        // No distance range will match because the venue is far away
+        
         assertFailsWith<BadRequestException> {
             deliveryFeeTotal.deliveryFeeTotalCalculation()
         }
@@ -163,7 +158,7 @@ class DeliveryFeeTotalTest {
         assertEquals(0, result.totalPurchasePrice)
         assertEquals(0, result.order_minimum_surcharge)
         assertEquals(cartValue, result.cart_value)
-        assertEquals(0, result.delivery_fee) // Assuming the distance fee is 100
+        assertEquals(0, result.delivery_fee) 
         assertEquals(177, result.delivery_distance) 
     }
 }

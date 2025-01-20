@@ -1,7 +1,3 @@
-// response null case
-// deliverydistance 0
-// equal to the max value but also minimu value of the next range
-// delivery distance = negative
 
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 

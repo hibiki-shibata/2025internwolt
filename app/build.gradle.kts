@@ -58,6 +58,24 @@ dependencies {
 
     testImplementation("io.ktor:ktor-client-mock:${ktorVersion}")
     testImplementation("io.mockk:mockk:1.13.5")
+    // testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+
+    // testImplementation ("io.mockk:mockk-coroutines:1.13.4")// Add this to enable coroutine mocking
+
+    testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
+    // testImplementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
+
+
+
+
+    // testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}}")
+    
+    // testImplementation("io.ktor:ktor-server-tests:${ktorVersion}")  // Ktor testing dependency
+    // testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.21")  // Kotlin test framework
+    // testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")  // JUnit Jupiter API
+    // testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")  // JUnit Jupiter Engine
+    
+    
 
     // This dependency is used by the application.
     implementation(libs.guava)

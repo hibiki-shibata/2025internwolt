@@ -2,10 +2,7 @@ package org.dopc.clientserverconfig.feecalculation.feecalctotal
 
 import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
-// import extractrequireddata.VenueStaticData
-// import minfeesurcharge.minFreeSurcharge() // Function
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge.MinSurchargeFee
-
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFee
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFeeInfo
 

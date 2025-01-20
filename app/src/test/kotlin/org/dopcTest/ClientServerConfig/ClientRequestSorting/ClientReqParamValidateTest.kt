@@ -18,12 +18,13 @@ class ClientReqDataValidationsTest {
 
     private val clientReqDataValidations = ClientReqDataValidations()
 
+
     @Test
     fun `should return valid ClientRequestParams for valid input`() {
         val applicationCall = mockk<ApplicationCall>()
         val mockRequest = mockk<ApplicationRequest>()
 
-        // Mocking the query parameters
+        // Mocking general case
         every { applicationCall.request } returns mockRequest
         every { mockRequest.queryParameters } returns Parameters.build {
             append("venue_slug", "home-assignment-venue-helsinki")
@@ -32,21 +33,20 @@ class ClientReqDataValidationsTest {
             append("user_lon", "24.93087")
         }
 
-        // Act
         val result = clientReqDataValidations.catchClientReqParams(applicationCall)
 
-        // Assert
         assertEquals("home-assignment-venue-helsinki", result.venue_slug)
         assertEquals(1000, result.cart_value)
         assertEquals(listOf(24.93087, 60.17094), result.user_coodinate)
     }
+
 
     @Test
     fun `should throw BadRequestException for missing venue_slug`() {
         val applicationCall = mockk<ApplicationCall>()
         val mockRequest = mockk<ApplicationRequest>()
 
-        // Mocking missing venue_slug
+        // missing venue_slug
         every { applicationCall.request } returns mockRequest
         every { mockRequest.queryParameters } returns Parameters.build {
             append("cart_value", "1000")
@@ -54,11 +54,11 @@ class ClientReqDataValidationsTest {
             append("user_lon", "24.93087")
         }
 
-        // Act & Assert
         assertFailsWith<BadRequestException> {
             clientReqDataValidations.catchClientReqParams(applicationCall)
         }
     }
+
 
     @Test
     fun `should throw BadRequestException for missing cart_value`() {
@@ -79,6 +79,7 @@ class ClientReqDataValidationsTest {
         }
     }
 
+
     @Test
     fun `should throw BadRequestException for missing user_lat`() {
         val applicationCall = mockk<ApplicationCall>()
@@ -92,12 +93,12 @@ class ClientReqDataValidationsTest {
             append("user_lon", "24.93087")
         }
 
-        // Act & Assert
         assertFailsWith<BadRequestException> {
             clientReqDataValidations.catchClientReqParams(applicationCall)
         }
     }
 
+    
     @Test
     fun `should throw BadRequestException for negative cart_value`() {
         val applicationCall = mockk<ApplicationCall>()
@@ -112,18 +113,18 @@ class ClientReqDataValidationsTest {
             append("user_lon", "24.93087")
         }
 
-        // Act & Assert
         assertFailsWith<BadRequestException> {
             clientReqDataValidations.catchClientReqParams(applicationCall)
         }
     }
+
 
     @Test
     fun `should throw BadRequestException for invalid cart_value type`() {
         val applicationCall = mockk<ApplicationCall>()
         val mockRequest = mockk<ApplicationRequest>()
 
-        // Mocking invalid cart_value (non-numeric)
+        // Mocking invalid cart_value 
         every { applicationCall.request } returns mockRequest
         every { mockRequest.queryParameters } returns Parameters.build {
             append("venue_slug", "home-assignment-venue-helsinki")
@@ -132,18 +133,18 @@ class ClientReqDataValidationsTest {
             append("user_lon", "24.93087")
         }
 
-        // Act & Assert
         assertFailsWith<BadRequestException> {
             clientReqDataValidations.catchClientReqParams(applicationCall)
         }
     }
+
 
     @Test
     fun `should throw BadRequestException for invalid user_lat type`() {
         val applicationCall = mockk<ApplicationCall>()
         val mockRequest = mockk<ApplicationRequest>()
 
-        // Mocking invalid user_lat (non-numeric)
+        // Mocking invalid user_lat 
         every { applicationCall.request } returns mockRequest
         every { mockRequest.queryParameters } returns Parameters.build {
             append("venue_slug", "home-assignment-venue-helsinki")
@@ -152,18 +153,18 @@ class ClientReqDataValidationsTest {
             append("user_lon", "24.93087")
         }
 
-        // Act & Assert
         assertFailsWith<BadRequestException> {
             clientReqDataValidations.catchClientReqParams(applicationCall)
         }
     }
+
 
     @Test
     fun `should throw BadRequestException for invalid user_lon type`() {
         val applicationCall = mockk<ApplicationCall>()
         val mockRequest = mockk<ApplicationRequest>()
 
-        // Mocking invalid user_lon (non-numeric)
+        // Mocking invalid user_lon
         every { applicationCall.request } returns mockRequest
         every { mockRequest.queryParameters } returns Parameters.build {
             append("venue_slug", "home-assignment-venue-helsinki")
@@ -172,24 +173,24 @@ class ClientReqDataValidationsTest {
             append("user_lon", "invalid")
         }
 
-        // Act & Assert
         assertFailsWith<BadRequestException> {
             clientReqDataValidations.catchClientReqParams(applicationCall)
         }
     }
 
+
     @Test
-    fun `should return valid ClientRequestParams for edge coordinates`() {
+    fun `should return BadRequestException for minus cartvalue`() {
         val applicationCall = mockk<ApplicationCall>()
         val mockRequest = mockk<ApplicationRequest>()
 
-        // Mocking edge case coordinates (max/min latitude/longitude)
+        // Mocking negative cart
         every { applicationCall.request } returns mockRequest
         every { mockRequest.queryParameters } returns Parameters.build {
             append("venue_slug", "home-assignment-venue-helsinki")
             append("cart_value", "-1000")
-            append("user_lat", "90.0")  // max latitude
-            append("user_lon", "180.0") // max longitude
+            append("user_lat", "90.0")  
+            append("user_lon", "180.0") 
         }
 
         
@@ -199,3 +200,6 @@ class ClientReqDataValidationsTest {
         
     }
 }
+
+
+

@@ -19,7 +19,7 @@ import io.ktor.client.call.*
 
 class RequestRestaurantData {
 
-    var client = HttpClient(CIO){ // var for 
+   internal var client = HttpClient(CIO){ // var for mocking
         install(ContentNegotiation){
             json()
         }            

@@ -1,9 +1,3 @@
-// cat value is lower
-// cart value is higher
-// cartvalue is 0
-// threshold and cartvalue is the same
-// cartvalue is negatuve, threshold is negative
-
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge
 
 
@@ -24,7 +18,6 @@ class MinSurchargeFeeTest {
         
         val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
         
-        // No surcharge when cart value is greater than or equal to the minimum threshold
         assertEquals(0, result)
     }
 
@@ -35,8 +28,7 @@ class MinSurchargeFeeTest {
         val minimumOrderThreshold = 1000
         
         val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
-        
-        // No surcharge when cart value is equal to the minimum threshold
+    
         assertEquals(0, result)
     }
 
@@ -48,7 +40,6 @@ class MinSurchargeFeeTest {
         
         val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
         
-        // Surcharge is the difference between the minimum threshold and cart value
         assertEquals(200, result)
     }
 
@@ -60,11 +51,10 @@ class MinSurchargeFeeTest {
         
         val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
         
-        // Surcharge is the difference between the minimum threshold and cart value
         assertEquals(400, result)
     }
 
-    // Test with small cart value (edge case)
+    // Test with soo small cart value 
     @Test
     fun `should return surcharge for small cart value`() {
         val cartValue = 1
@@ -72,7 +62,6 @@ class MinSurchargeFeeTest {
         
         val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
         
-        // Surcharge is the difference between the minimum threshold and cart value
         assertEquals(999, result)
     }
 
@@ -84,7 +73,6 @@ class MinSurchargeFeeTest {
         
         val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
         
-        // Surcharge is the difference between the minimum threshold and cart value
         assertEquals(0, result)
     }
     
@@ -93,13 +81,9 @@ class MinSurchargeFeeTest {
     fun `Negative calculatioon`() {
         val cartValue = -11
         val minimumOrderThreshold = -10
-        
-        // val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
-        
+                
         assertFailsWith<Exception> {
             minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
         }
-        // Surcharge is the difference between the minimum threshold and cart value
-        // assertEquals(1, result)
     }
 }

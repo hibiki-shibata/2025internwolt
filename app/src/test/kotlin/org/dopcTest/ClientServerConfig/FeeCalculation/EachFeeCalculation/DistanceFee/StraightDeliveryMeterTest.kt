@@ -1,4 +1,3 @@
-// random examples
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 
 import kotlin.test.Test
