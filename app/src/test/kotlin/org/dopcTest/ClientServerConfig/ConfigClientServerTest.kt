@@ -1,4 +1,4 @@
-// package org.dopc.clientserverconfig.configclientserver
+package org.dopc.clientserverconfig.configclientserver
 
 // This code is for configurations of ktor netty server
 

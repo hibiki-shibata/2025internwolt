@@ -19,11 +19,7 @@ import io.ktor.client.call.*
 
 class RequestRestaurantData {
 
-   internal var client = HttpClient(CIO){ // var for mocking
-        install(ContentNegotiation){
-            json()
-        }            
-    }
+   internal var client = HttpClient(CIO)
 
     // val venueSlug = "home-assignment-venue-helsinki"
     suspend fun fetchStaticVenueInfo(venueSlug: String): String {

@@ -80,6 +80,12 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
+tasks.test {
+    testLogging {
+        showStandardStreams = true  // Make sure stdout and stderr are shown
+    }
+}
+
 
 
 tasks.jar {

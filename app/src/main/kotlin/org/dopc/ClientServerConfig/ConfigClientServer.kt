@@ -35,7 +35,7 @@ class ClientServer {
         embeddedServer(Netty, port = 8000) {
 
             install(ContentNegotiation){
-                json(Json{ignoreUnknownKeys = false})
+                json(Json{ignoreUnknownKeys = true})
             }
 
             routing {
@@ -43,11 +43,11 @@ class ClientServer {
                     try {
                         
                         val responseDataJson: ResponseDataToClient = DopcProcessIndex().dopcIndexCalculation(call)
+                                        
+                        call.respond(responseDataJson )
 
-                        val responseDataString: String = Json.encodeToString(responseDataJson)
-                        // make it into Json
-             
-                        call.respond(responseDataString )
+                        // if we want to response as a string↓↓↓
+                        // val responseDataString: ResponseDataToClient = Json.encodeToString(responseDataJson)
                    
                                             
                     } catch (e: BadRequestException) {                   
