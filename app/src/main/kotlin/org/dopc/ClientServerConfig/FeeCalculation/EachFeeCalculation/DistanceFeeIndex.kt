@@ -11,8 +11,8 @@ data class DistanceFeeInfo(
     val deliveryDistanceInMeter: Int
 )
 
-class DistanceFee{
-    fun distanceFee(baseDeliveryFee: Int, userCoordinate: List<Double>, venueCoordinateList: List<Double>, distanceRanges: List<DistanceRange>): DistanceFeeInfo {
+internal class DistanceFee{
+    internal fun distanceFee(baseDeliveryFee: Int, userCoordinate: List<Double>, venueCoordinateList: List<Double>, distanceRanges: List<DistanceRange>): DistanceFeeInfo {
 
         // Straight Distance User and Venue
         val meterStraightDeliveryDistance: Double = calcStraightDeliveryDistance(venueCoordinateList, userCoordinate)

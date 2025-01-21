@@ -12,9 +12,9 @@ data class ClientRequestParams(
     )
     
 
-class ClientReqDataValidations() { 
+internal class ClientReqDataValidations() { 
 
-    fun catchClientReqParams(call: ApplicationCall): ClientRequestParams {
+    internal fun catchClientReqParams(call: ApplicationCall): ClientRequestParams {
             
         val venueSlug: String?  = call.request.queryParameters["venue_slug"]?.toString()
         val cartValue: Int? = call.request.queryParameters["cart_value"]?.toIntOrNull()

@@ -17,7 +17,7 @@ data class CalculatedPricesData(
 )
 
 // cartValue: Int, orderMinimumSurcharge: Int, userCoordinates, venuCoordinates, distanceRange, 
-class DeliveryFeeTotal(
+internal class DeliveryFeeTotal(
         cart_value: Int,
         base_delivery_fee: Int,
         order_minimum_no_surcharge: Int,
@@ -34,7 +34,7 @@ class DeliveryFeeTotal(
     private val distance_ranges: List<DistanceRange> = distance_ranges
 
     
-    fun  deliveryFeeTotalCalculation(): CalculatedPricesData {
+    internal fun  deliveryFeeTotalCalculation(): CalculatedPricesData {
 
         // Order size minimum Surcharge
         val finalizedMinSurchargeFee: Int = MinSurchargeFee().minSurchargeFee(cart_value, order_minimum_no_surcharge)

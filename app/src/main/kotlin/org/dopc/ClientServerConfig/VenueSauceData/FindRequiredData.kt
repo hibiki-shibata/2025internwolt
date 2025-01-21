@@ -24,7 +24,7 @@ data class VenueDynamicData (
 
 
 
-class ExtractRequiredVenueInfoForDopc(venueSlug: String) {
+internal class ExtractRequiredVenueInfoForDopc(venueSlug: String) {
 
     private val venueSlug: String = venueSlug
 
@@ -33,7 +33,7 @@ class ExtractRequiredVenueInfoForDopc(venueSlug: String) {
 
 
 
-    suspend fun venueCoordinatesStatic(): VenueStaticData {
+    suspend internal fun venueCoordinatesStatic(): VenueStaticData {
 
         val staticVenueJsonString: String = requestRestaurantData.fetchStaticVenueInfo(venueSlug)
         val staticVenueInfoJson = json.decodeFromString<VenueRawStatic>(staticVenueJsonString)
@@ -49,7 +49,7 @@ class ExtractRequiredVenueInfoForDopc(venueSlug: String) {
 
 
 
-    suspend fun venueDeliveryFeesDynamic(): VenueDynamicData {
+    suspend internal fun venueDeliveryFeesDynamic(): VenueDynamicData {
 
         val dynamicVenueJsonString: String = requestRestaurantData.fetchDynamicVenueInfo(venueSlug)
         val dynamicVenueInfoJson = json.decodeFromString<VenueRawDynamic>(dynamicVenueJsonString)

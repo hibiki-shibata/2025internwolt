@@ -2,7 +2,7 @@ package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeein
 
 import kotlin.math.*
 
-fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates: List<Double>): Double{
+internal fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCoordinates: List<Double>): Double{
 
     val lat1Rad: Double = Math.toRadians(venueCoordinates[1])
     val lat2Rad: Double = Math.toRadians(userCoordinates[1])

@@ -3,7 +3,7 @@ package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeein
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 
 
-fun findDistanceRange(distanceRanges: List<DistanceRange>, deliveryDistance: Double): DistanceRange? {
+internal fun findDistanceRange(distanceRanges: List<DistanceRange>, deliveryDistance: Double): DistanceRange? {
     
     for (range in distanceRanges) {
         if (deliveryDistance >= range.min && deliveryDistance < range.max) return range        

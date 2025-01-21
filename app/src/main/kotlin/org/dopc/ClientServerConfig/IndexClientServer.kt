@@ -18,6 +18,8 @@ import org.dopc.clientserverconfig.feecalculation.feecalctotal.CalculatedPricesD
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
+// coroutine
+import kotlinx.coroutines.*
 
 
 
@@ -40,7 +42,7 @@ data class Delivery(
 
 class DopcProcessIndex {
     
-    suspend fun dopcIndexCalculation(call: ApplicationCall): ResponseDataToClient {
+  suspend internal fun dopcIndexCalculation(call: ApplicationCall): ResponseDataToClient {
 
         ///// Extract required Data 
         // Examine User Info, Check if request URI has required params in expected data type, otherwise throw Badrequest error

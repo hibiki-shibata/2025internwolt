@@ -17,12 +17,12 @@ import io.ktor.client.call.*
 
 
 
-class RequestRestaurantData {
+internal class RequestRestaurantData {
 
    internal var client = HttpClient(CIO)
 
     // val venueSlug = "home-assignment-venue-helsinki"
-    suspend fun fetchStaticVenueInfo(venueSlug: String): String {
+    suspend internal fun fetchStaticVenueInfo(venueSlug: String): String {
 
         // HttpResponse
         val requestStaticVenueInfo: String = "https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/${venueSlug}/static"
@@ -38,7 +38,7 @@ class RequestRestaurantData {
 
     
 
-    suspend fun fetchDynamicVenueInfo(venueSlug: String): String {
+    suspend internal fun fetchDynamicVenueInfo(venueSlug: String): String {
     
             // HttpResponse
             val requestDynamicVenueInfo: String = "https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/${venueSlug}/dynamic"
