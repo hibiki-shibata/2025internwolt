@@ -6,6 +6,11 @@
 
 ---
 
+The **Ktor Netty Server** is configured to listen on:
+
+- **Host**: `localhost`
+- **Port**: `8000`
+
 ## 🛠️ Testing
 
 ### 1. Run Development Server
