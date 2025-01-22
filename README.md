@@ -74,8 +74,8 @@ app/
     └── test/
         └── kotlin/
             └── dopc/
-                ├── IndextTest.kt                         # Integration tests
+                ├── IndextTest.kt                         # Integration tests(Make actual http request to the localhost:8000)
 
-# Another tests(Unit Test) are corresponded to the structures of main dictionaly
+# Another tests(Unit Test)' files are corresponded to the structures of main dictionaly
 ```
 Code Owner: hibiki.shibata@wolt.com

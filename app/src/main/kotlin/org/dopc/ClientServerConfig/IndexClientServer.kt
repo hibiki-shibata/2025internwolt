@@ -42,7 +42,7 @@ data class Delivery(
 
 class DopcProcessIndex {
     
-  suspend internal fun dopcIndexCalculation(call: ApplicationCall): ResponseDataToClient {
+   internal suspend fun dopcIndexCalculation(call: ApplicationCall): ResponseDataToClient = runBlocking{
 
         ///// Extract required Data 
         // Examine User Info, Check if request URI has required params in expected data type, otherwise throw Badrequest error
@@ -50,9 +50,11 @@ class DopcProcessIndex {
 
         // FetchVenueSauceData
         val venueSauceInfo: ExtractRequiredVenueInfoForDopc = ExtractRequiredVenueInfoForDopc(clientReqDataValidations.venue_slug) // Class Instance
-        val venueDataStatic: VenueStaticData = venueSauceInfo.venueCoordinatesStatic() // coordinates
-        val venueDataDynamic: VenueDynamicData = venueSauceInfo.venueDeliveryFeesDynamic() // order_minimum_no_surcharge, delivery_pricing, distance_ranges
+        val venueDataStaticdeffered = async{venueSauceInfo.venueCoordinatesStatic()} // coordinates
+        val venueDataDynamicdeffered = async{venueSauceInfo.venueDeliveryFeesDynamic()} // order_minimum_no_surcharge, delivery_pricing, distance_ranges
         
+        val venueDataStatic: VenueStaticData = venueDataStaticdeffered.await()
+        val venueDataDynamic: VenueDynamicData = venueDataDynamicdeffered.await()
 
 
         ///// Fee Calculations
@@ -67,7 +69,7 @@ class DopcProcessIndex {
 
 
 
-        return ResponseDataToClient(
+        return@runBlocking ResponseDataToClient(
              total_price = deliveryFeeTotal.totalPurchasePrice,
              small_order_surcharge = deliveryFeeTotal.order_minimum_surcharge,
              cart_value = deliveryFeeTotal.cart_value,
