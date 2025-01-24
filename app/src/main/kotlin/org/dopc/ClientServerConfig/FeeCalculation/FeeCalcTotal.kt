@@ -1,12 +1,14 @@
 package org.dopc.clientserverconfig.feecalculation.feecalctotal
 
+import kotlinx.coroutines.*
+
 import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge.MinSurchargeFee
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFee
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFeeInfo
 
-import kotlinx.coroutines.*
+
 
 
 data class CalculatedPricesData(

@@ -24,7 +24,7 @@ internal class ClientReqDataValidations() {
         
         // Check If URI has all necessary params
         val isValidParams: Boolean = venueSlug !== null && cartValue !== null && userLat !== null && userLon !== null
-        if(!isValidParams) throw BadRequestException("invalid params value or missing mandatory parameters" + "slug=" + venueSlug +" cartValue=" + cartValue + " Lat=" + userLat + " Lon=" + userLon)        
+        if(!isValidParams) throw BadRequestException("invalid params value or missing mandatory parameters\nCaptured parameters: " + "slug=" + venueSlug +" cartValue=" + cartValue + " Lat=" + userLat + " Lon=" + userLon)        
         
 
         // Check if cartValue is negative

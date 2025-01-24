@@ -2,10 +2,15 @@ package org.dopc.clientserverconfig.indexclientserver
 
 import io.ktor.server.application.*
 
-import org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate.ClientReqDataValidations
-import org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate.ClientRequestParams
+// Json
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
+
+import kotlinx.coroutines.*
 
 // import clientserverindex.DopcProcessIndex
+import org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate.ClientReqDataValidations
+import org.dopc.clientserverconfig.clientrequestsorting.clientreqparamvalidate.ClientRequestParams
 
 import org.dopc.clientserverconfig.venuesaucedata.findrequireddata.ExtractRequiredVenueInfoForDopc
 import org.dopc.clientserverconfig.venuesaucedata.findrequireddata.VenueDynamicData
@@ -13,13 +18,6 @@ import org.dopc.clientserverconfig.venuesaucedata.findrequireddata.VenueStaticDa
 
 import org.dopc.clientserverconfig.feecalculation.feecalctotal.DeliveryFeeTotal
 import org.dopc.clientserverconfig.feecalculation.feecalctotal.CalculatedPricesData
-
-// Json
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-
-// coroutine
-import kotlinx.coroutines.*
 
 
 
