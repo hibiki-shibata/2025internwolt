@@ -33,14 +33,14 @@ class calcStraightDeliveryDistanceTest {
 
     // Test edge case with negative value in usercoordinates
     @Test
-    fun `should calculate distance correctly with polar coordinates`() {
-        val venueCoordinates = listOf(0.0, 90.0)  // North Pole 
-        val userCoordinates = listOf(0.0, -90.0) // South Pole 
+    fun `should calculate distance correctly with negative lat and positive lat coordinates`() {
+        val venueCoordinates = listOf(139.74546295402249, 35.658622906567)  // Tokyo tower 35.65862290656749, 139.74546295402249
+        val userCoordinates = listOf(151.176456945061, -33.9405639972) // Sydoney Airport -33.94056399722494, 151.17645694506172
         
         val result = calcStraightDeliveryDistance(venueCoordinates, userCoordinates)
         
-        // Distance between the poles is roughly 20,000 km
-        assertTrue(abs(result - 20000000.0) < 100000.0, "Distance between poles should be approximately 20,000 km")
+        // Distance between Tokyo tower to Sydoney Airpot is roughly 7,829.87  km
+        assertTrue(abs(result - 7829000.0) < 3000.0, "Distance between poles should be approximately 20,000 km")
     }
 
 }

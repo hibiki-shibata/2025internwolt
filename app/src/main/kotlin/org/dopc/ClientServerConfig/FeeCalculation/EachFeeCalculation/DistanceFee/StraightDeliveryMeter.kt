@@ -9,15 +9,15 @@ internal fun calcStraightDeliveryDistance(venueCoordinates: List<Double>, userCo
     val lon1Rad: Double = Math.toRadians(venueCoordinates[0])
     val lon2Rad: Double = Math.toRadians(userCoordinates[0])
 
-    val dLat: Double = lat2Rad - lat1Rad
-    val dLon: Double = lon2Rad - lon1Rad
-    val radius: Double = 6371.0 
+    val differenceLat: Double = lat2Rad - lat1Rad
+    val differenceLon: Double = lon2Rad - lon1Rad
+    val eathRadius: Double = 6371.0 
 
-    val a: Double = sin(dLat / 2).pow(2) + cos(lat1Rad) * cos(lat2Rad) * sin(dLon / 2).pow(2)
+    val haversineComponent: Double = sin(differenceLat / 2).pow(2) + cos(lat1Rad) * cos(lat2Rad) * sin(differenceLon / 2).pow(2)
 
-    val c: Double = 2 * asin(sqrt(a))
+    val centralAngle: Double = 2 * asin(sqrt(haversineComponent))
 
-    val straightDistanceMeter: Double = radius * c * 1000
+    val straightDistanceMeter: Double = eathRadius * centralAngle * 1000
 
     //Ensure distance is always positive value  
     if (straightDistanceMeter < 0) throw Exception("calculated distance was negative")
