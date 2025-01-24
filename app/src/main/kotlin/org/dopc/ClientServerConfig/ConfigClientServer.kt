@@ -22,11 +22,12 @@ import io.ktor.server.plugins.BadRequestException
 
 // For handle status code receive & respond
 import io.ktor.server.request.* 
+import io.ktor.server.plugins.statuspages.*
+
 
 import org.dopc.clientserverconfig.indexclientserver.DopcProcessIndex
 import org.dopc.clientserverconfig.indexclientserver.ResponseDataToClient
 
-import kotlinx.coroutines.*
 
 
 class ClientServer {
@@ -38,26 +39,30 @@ class ClientServer {
                 json(Json{ignoreUnknownKeys = true})
             }
 
+            install(StatusPages) {
+                exception<Throwable> { call, cause ->
+                    if(cause is BadRequestException) {
+                        call.respondText(
+                            text = "400: Invalid request\nRequired params: venue_slug(Strong), cart_value(Int), user_lat(Double), user_lon(Double)\n\nDetails:\n${cause.message}",
+                            status = HttpStatusCode.BadRequest
+                        )
+                    } else {
+                        call.respondText(
+                            text = "500: Internal Server Error\n Unexpected error happened:(",
+                            status = HttpStatusCode.InternalServerError
+                        )
+                    }
+                }
+            }
+
             routing {
                 get("/api/v1/delivery-order-price") {
-                    try {
                         
-                        val responseDataJson: ResponseDataToClient = DopcProcessIndex().dopcIndexCalculation(call)
-                                        
-                        call.respond(responseDataJson )
-
+                    val responseDataJson: ResponseDataToClient = DopcProcessIndex().dopcIndexCalculation(call)
+                                    
+                    call.respond(responseDataJson )
                         // if we want to response as a string↓↓↓
-                        // val responseDataString: ResponseDataToClient = Json.encodeToString(responseDataJson)
-                   
-                                            
-                    } catch (e: BadRequestException) {                   
-                        call.respond(HttpStatusCode.BadRequest, " 400: Invalid request\nRequired params: venue_slug(Strong), cart_value(Int), user_lat(Double), user_lon(Double)\n${e.message}")
-
-                    } catch (e: Exception) {
-                        call.respond(HttpStatusCode.InternalServerError, "500: Internal Server Error\n Unexpected error happened:(")
-                        // println(e.message)
-                    }
-
+                        // val responseDataString: ResponseDataToClient = Json.encodeToString(responseDataJson)        
                 }
             }
         }.start(wait = true)
