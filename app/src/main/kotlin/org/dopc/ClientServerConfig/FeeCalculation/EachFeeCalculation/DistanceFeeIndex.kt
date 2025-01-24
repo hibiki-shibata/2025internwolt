@@ -1,9 +1,10 @@
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 
 import io.ktor.server.plugins.BadRequestException
-import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 
 import kotlin.math.roundToInt
+
+import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 
 
 data class DistanceFeeInfo(

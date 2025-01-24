@@ -1,10 +1,10 @@
 package org.dopc.clientserverconfig.venuesaucedata.findrequireddata
 
-import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
-
 // Json
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
+
+import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
 
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructurestatic.VenueRawStatic
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.VenueRawDynamic
