@@ -8,6 +8,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
+import kotlinx.coroutines.*
+
 class DistanceFeeTest {
 
     // Example from assignment(Helsinki)
@@ -25,7 +27,7 @@ class DistanceFeeTest {
         )
 
         val distanceFee = DistanceFee()
-        val result = distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)
+        val result = runBlocking{distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)}
 
 
         assertEquals(190, result.distanceFeeTotal, "The calculated fee is incorrect.")
@@ -50,7 +52,7 @@ class DistanceFeeTest {
         val distanceFee = DistanceFee()
 
         assertFailsWith<BadRequestException> {
-            distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)
+            runBlocking{distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)}
         }
     }
 
@@ -69,7 +71,7 @@ class DistanceFeeTest {
         val distanceFee = DistanceFee()
 
         assertFailsWith<BadRequestException> {
-            distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)
+            runBlocking{distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)}
         }
     }
 
@@ -84,7 +86,7 @@ class DistanceFeeTest {
         val distanceFee = DistanceFee()
 
         assertFailsWith<BadRequestException> {
-            distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)
+            runBlocking{distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)}
         }
     }
 
@@ -100,7 +102,7 @@ class DistanceFeeTest {
         )
 
         val distanceFee = DistanceFee()
-        val result = distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)
+        val result = runBlocking{distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)}
 
 
         assertEquals(0, result.distanceFeeTotal, "The calculated fee is incorrect.")
@@ -120,7 +122,7 @@ class DistanceFeeTest {
 
        val distanceFee = DistanceFee()
         assertFailsWith<Exception> {
-            distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)
+            runBlocking{distanceFee.distanceFee(baseDeliveryFee, userCoordinates, venueCoordinates, distanceRanges)}
         }
         
     }

@@ -1,10 +1,11 @@
 package org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex
 
-import io.ktor.server.plugins.BadRequestException
 
 import kotlin.math.roundToInt
-
+import io.ktor.server.plugins.BadRequestException
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
+
+
 
 
 data class DistanceFeeInfo(
@@ -13,7 +14,7 @@ data class DistanceFeeInfo(
 )
 
 internal class DistanceFee{
-    internal fun distanceFee(baseDeliveryFee: Int, userCoordinate: List<Double>, venueCoordinateList: List<Double>, distanceRanges: List<DistanceRange>): DistanceFeeInfo {
+    internal suspend fun distanceFee(baseDeliveryFee: Int, userCoordinate: List<Double>, venueCoordinateList: List<Double>, distanceRanges: List<DistanceRange>): DistanceFeeInfo {
 
         // Straight Distance User and Venue
         val meterStraightDeliveryDistance: Double = calcStraightDeliveryDistance(venueCoordinateList, userCoordinate)

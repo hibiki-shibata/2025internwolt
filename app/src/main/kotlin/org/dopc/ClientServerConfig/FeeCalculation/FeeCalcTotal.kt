@@ -1,10 +1,14 @@
 package org.dopc.clientserverconfig.feecalculation.feecalctotal
 
+import kotlinx.coroutines.*
+
 import org.dopc.clientserverconfig.venuesaucedata.allvenuedataapi.RequestRestaurantData
 import org.dopc.clientserverconfig.venuesaucedata.jsonstructuredynamic.DistanceRange
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.minfeesurcharge.MinSurchargeFee
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFee
 import org.dopc.clientserverconfig.feecalculation.eachcalculation.distancefeeindex.DistanceFeeInfo
+
+
 
 
 data class CalculatedPricesData(
@@ -34,16 +38,26 @@ internal class DeliveryFeeTotal(
     private val distance_ranges: List<DistanceRange> = distance_ranges
 
     
-    internal fun  deliveryFeeTotalCalculation(): CalculatedPricesData {
+    internal fun  deliveryFeeTotalCalculation(): CalculatedPricesData = runBlocking {
 
         // Order size minimum Surcharge
-        val finalizedMinSurchargeFee: Int = MinSurchargeFee().minSurchargeFee(cart_value, order_minimum_no_surcharge)
+        val finalizedMinSurchargeFeeDeffered = async{
+            MinSurchargeFee().minSurchargeFee(cart_value, order_minimum_no_surcharge)
+        }
     
 
         // Distance base pricing
-        val distanceFeeResult: DistanceFeeInfo = DistanceFee().distanceFee(base_delivery_fee, user_coordinate, venue_coordinate, distance_ranges)
+        val distanceFeeResultDeffered = async{
+            DistanceFee().distanceFee(base_delivery_fee, user_coordinate, venue_coordinate, distance_ranges)
+        }        
+        
+        val finalizedMinSurchargeFee: Int = finalizedMinSurchargeFeeDeffered.await()
+        val distanceFeeResult: DistanceFeeInfo = distanceFeeResultDeffered.await()
+
+
         val deliveryDistanceMeter: Int = distanceFeeResult.deliveryDistanceInMeter
         val finalizedDistanceFee: Int = distanceFeeResult.distanceFeeTotal
+        
         
         
         // ALL TOTAL PRICE IN THE PUERCHASE!!
@@ -51,7 +65,7 @@ internal class DeliveryFeeTotal(
         
         if(allTotalPrice < 0) throw Exception("Negative total price was calculated:(")
 
-        return CalculatedPricesData(
+        return@runBlocking CalculatedPricesData(
             totalPurchasePrice = allTotalPrice,
             order_minimum_surcharge = finalizedMinSurchargeFee,
             cart_value = cart_value,

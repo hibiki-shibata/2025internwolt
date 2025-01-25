@@ -5,7 +5,7 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.12/userguide/building_java_projects.html in the Gradle documentation.
  */
 
-plugins {
+ plugins {
     alias(libs.plugins.kotlin.jvm)
 
     id("io.ktor.plugin") version "2.3.9"

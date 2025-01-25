@@ -24,9 +24,11 @@ import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.request.* 
 import io.ktor.server.plugins.statuspages.*
 
+import kotlinx.coroutines.*
 
 import org.dopc.clientserverconfig.indexclientserver.DopcProcessIndex
 import org.dopc.clientserverconfig.indexclientserver.ResponseDataToClient
+
 
 
 
@@ -35,6 +37,7 @@ class ClientServer {
     fun deliveryOrderFeeCalculator() {
         embeddedServer(Netty, port = 8000) {
 
+            
             install(ContentNegotiation){
                 json(Json{ignoreUnknownKeys = true})
             }
@@ -55,14 +58,15 @@ class ClientServer {
                 }
             }
 
+
             routing {
-                get("/api/v1/delivery-order-price") {
-                        
-                    val responseDataJson: ResponseDataToClient = DopcProcessIndex().dopcIndexCalculation(call)
-                                    
-                    call.respond(responseDataJson )
+                get("/api/v1/delivery-order-price") {                    
+                        val responseDataJson: ResponseDataToClient = DopcProcessIndex().dopcIndexCalculation(call)
+                                        
+                        call.respond(responseDataJson )
+
                         // if we want to response as a string↓↓↓
-                        // val responseDataString: ResponseDataToClient = Json.encodeToString(responseDataJson)        
+                        // val responseDataString: ResponseDataToClient = Json.encodeToString(responseDataJson)                                                                               
                 }
             }
         }.start(wait = true)

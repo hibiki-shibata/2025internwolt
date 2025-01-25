@@ -5,6 +5,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
+import kotlinx.coroutines.*
+
 
 class MinSurchargeFeeTest {
 
@@ -16,7 +18,7 @@ class MinSurchargeFeeTest {
         val cartValue = 1200
         val minimumOrderThreshold = 1000
         
-        val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        val result = runBlocking{minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)}
         
         assertEquals(0, result)
     }
@@ -27,7 +29,7 @@ class MinSurchargeFeeTest {
         val cartValue = 1000
         val minimumOrderThreshold = 1000
         
-        val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        val result = runBlocking{minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)}
     
         assertEquals(0, result)
     }
@@ -38,7 +40,7 @@ class MinSurchargeFeeTest {
         val cartValue = 800
         val minimumOrderThreshold = 1000
         
-        val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        val result = runBlocking{minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)}
         
         assertEquals(200, result)
     }
@@ -49,7 +51,7 @@ class MinSurchargeFeeTest {
         val cartValue = 100
         val minimumOrderThreshold = 500
         
-        val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        val result = runBlocking{minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)}
         
         assertEquals(400, result)
     }
@@ -60,7 +62,7 @@ class MinSurchargeFeeTest {
         val cartValue = 1
         val minimumOrderThreshold = 1000
         
-        val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        val result = runBlocking{minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)}
         
         assertEquals(999, result)
     }
@@ -71,7 +73,7 @@ class MinSurchargeFeeTest {
         val cartValue = 0
         val minimumOrderThreshold = 0
         
-        val result = minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+        val result = runBlocking{minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)}
         
         assertEquals(0, result)
     }
@@ -83,7 +85,7 @@ class MinSurchargeFeeTest {
         val minimumOrderThreshold = -10
                 
         assertFailsWith<Exception> {
-            minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)
+            runBlocking{minSurchargeFee.minSurchargeFee(cartValue, minimumOrderThreshold)}
         }
     }
 }
