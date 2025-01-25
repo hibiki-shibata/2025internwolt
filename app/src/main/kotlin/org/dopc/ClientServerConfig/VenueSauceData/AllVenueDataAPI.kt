@@ -13,13 +13,20 @@ import io.ktor.http.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 
+//Time out
+import io.ktor.client.plugins.*
+
 import io.ktor.client.call.*
 
 
 
 internal class RequestRestaurantData {
 
-   internal var client = HttpClient(CIO)
+   internal var client = HttpClient(CIO){
+    install(HttpTimeout){
+        requestTimeoutMillis = 5000
+    }
+   }
 
     // val venueSlug = "home-assignment-venue-helsinki"
     suspend internal fun fetchStaticVenueInfo(venueSlug: String): String {
